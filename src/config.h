@@ -7,5 +7,9 @@
 
 #include "iostream"
 #include "EasyLib.cpp"
+#include "HttpRequests.cpp"
+#include "utility"
+#include "curl/curl.h"
+#include "thread"
 
 #endif //EASYDDOS_CONFIG_H

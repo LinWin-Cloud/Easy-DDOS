@@ -2,10 +2,31 @@
 // Created by ubuntu on 24-2-10.
 //
 #include "config.h"
+#include "thread"
 using namespace std;
 
 string version_name = "1.0 Public";
 
+void http_attack_one_thread(string number , string target) {
+    auto* httpRequests = new HttpRequests(target);
+
+}
+
+void HttpAttack() {
+    cout << "[!] Http攻击 ==>" << endl;
+    try {
+        string target = trim(input("输入攻击目标 URL: "));
+        int thread = stoi(trim(input("输入模拟的用户数量(最高 2000): ")));
+        string number = trim(input("输入当个用户发送的数据量(输入max则不限量): "));
+
+        for (int i = 0 ; i < thread ;i++){
+            std::thread t(http_attack_one_thread , number , target);
+        }
+
+    }catch (const runtime_error) {
+        cout << "错误的输入" << endl;
+    }
+}
 
 void printLogo() {
     string logo_string = R"(
@@ -48,7 +69,7 @@ int main() {
             printHelp();
         }
         else if (command == "1") {
-            
+            HttpAttack();
         }
         else {
             cout << "[!] ERROR INPUT: " << command << endl; // error command.
