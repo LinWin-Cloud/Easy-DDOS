@@ -36,7 +36,7 @@ public:
             if (res == CURLE_OK) {
                 return readBuffer;
             } else {
-                return curl_easy_strerror(res);
+                throw runtime_error("Http Requests Error , Method: GET.");
             }
         }
         else {

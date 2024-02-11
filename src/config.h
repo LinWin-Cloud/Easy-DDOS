@@ -11,5 +11,7 @@
 #include "utility"
 #include "curl/curl.h"
 #include "thread"
+#include <vector>
+#include <future>
 
 #endif //EASYDDOS_CONFIG_H
