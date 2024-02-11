@@ -57,6 +57,11 @@ void HttpAttack() {
     }
 }
 
+void whois() {
+    string target = trim(input("输入要查询的网站: "));
+    system(("whois " + target).c_str());
+}
+
 void printLogo() {
     string logo_string = R"(
      _____                ____  ____   ___  ____
@@ -101,10 +106,11 @@ int main() {
             HttpAttack();
         }
         else if (command == "2") {
-
+            auto* death_ping = new DeathOfPing();
+            death_ping->Console();
         }
         else if (command == "5") {
-
+            whois();
         }
         else {
             cout << "[!] ERROR INPUT: " << command << endl; // error command.

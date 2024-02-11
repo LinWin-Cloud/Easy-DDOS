@@ -6,12 +6,15 @@
 #define EASYDDOS_CONFIG_H
 
 #include "iostream"
-#include "EasyLib.cpp"
-#include "HttpRequests.cpp"
 #include "utility"
 #include "curl/curl.h"
 #include "thread"
 #include <vector>
 #include <future>
+#include <functional>
+
+#include "EasyLib.cpp"
+#include "HttpRequests.cpp"
+#include "death_ping.cpp"
 
 #endif //EASYDDOS_CONFIG_H
