@@ -1,1 +1,3 @@
 libcurl4-openssl-dev
+net-tools
+whois
