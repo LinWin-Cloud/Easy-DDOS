@@ -122,7 +122,7 @@ int main() {
             cout << lan_arp_linux().c_str() << endl;
         }
         else if (command == "4") {
-            lan_ip_address();
+            lan_attack();
         }
         else if (command == "5") {
             whois();

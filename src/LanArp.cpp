@@ -27,11 +27,13 @@ vector<string> lan_ip_address() {
         if (i >= line_arp.size() -3) {
             break;
         }
-        char *const o_c = " ";
-        char *const n_c = "";
-        string ip = replaceAll_Cpp(line_arp[i] , *o_c, *n_c);
-        cout << ip.substr(0,ip.find(" ")) << endl;
-        ips.push_back(line_arp[i].substr(0, line_arp[i].find(' ')));
+        const char *a = "\t";
+        const char *b = " ";
+        string ip = replaceAll_Cpp(line_arp[i] ,  *a,*b).substr(0,ip.find(' '));
+        ip = trim(ip);
+        cout << " [INFO] Scan ==>" << endl;
+        cout << ip << endl;
+        ips.push_back(ip);
     }
     return ips;
 }

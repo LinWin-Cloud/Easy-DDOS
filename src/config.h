@@ -20,5 +20,6 @@
 #include "HttpRequests.cpp"
 #include "death_ping.cpp"
 #include "LanArp.cpp"
+#include "lan_attack.cpp"
 
 #endif //EASYDDOS_CONFIG_H
