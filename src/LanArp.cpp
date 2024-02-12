@@ -23,16 +23,17 @@ vector<string> lan_ip_address() {
     vector<string> ips;
     string lan_arp = lan_arp_linux();
     vector<string> line_arp = split(lan_arp , "\n");
+    cout << " [INFO] Scan ==>" << endl;
     for (int i = 2;i < line_arp.size() ;i++) {
         if (i >= line_arp.size() -3) {
             break;
         }
         const char *a = "\t";
         const char *b = " ";
-        string ip = replaceAll_Cpp(line_arp[i] ,  *a,*b).substr(0,ip.find(' '));
+        string ip = replaceAll_Cpp(line_arp[i] ,  *a,*b);
+        ip = ip.substr(0,ip.find(' '));
         ip = trim(ip);
-        cout << " [INFO] Scan ==>" << endl;
-        cout << ip << endl;
+        cout << " - " << ip << endl;
         ips.push_back(ip);
     }
     return ips;

@@ -35,8 +35,8 @@ public:
             curl_easy_cleanup(curl);
             if (res == CURLE_OK) {
                 return readBuffer;
-            } else {
-                throw runtime_error("Http Requests Error , Method: GET.");
+            }else {
+                return readBuffer;
             }
         }
         else {
