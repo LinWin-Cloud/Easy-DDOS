@@ -99,6 +99,7 @@ int main() {
     printLogo();
     cout << " [!] Version: " << version_name.c_str() << endl;
     cout << "Input 'help' to get help information." << endl;
+    cout << "Input 'doc' to show the documents." << endl;
 
     printHelp();
     while (true) {
@@ -127,6 +128,9 @@ int main() {
         }
         else if (command == "5") {
             whois();
+        }
+        else if (command == "doc") {
+            documents_console();
         }
         else {
             cout << "[!] ERROR INPUT: " << command << endl; // error command.

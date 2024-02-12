@@ -53,3 +53,16 @@ string replaceAll_Cpp(string str_to , char charToReplace , char newChar) {
     }
     return str;
 }
+
+string get_file_content(string file_name) {
+    FILE* file = fopen(file_name.c_str()  , "r");
+    if (file == NULL) {
+        throw runtime_error("can not open file:"+file_name);
+    }
+    stringstream ss;
+    char content;
+    while((content = fgetc(file)) != EOF) {
+        ss << content;
+    }
+    return ss.str();
+}

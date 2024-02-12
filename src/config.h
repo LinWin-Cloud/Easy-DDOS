@@ -21,5 +21,6 @@
 #include "death_ping.cpp"
 #include "LanArp.cpp"
 #include "lan_attack.cpp"
+#include "doc_view.cpp"
 
 #endif //EASYDDOS_CONFIG_H
