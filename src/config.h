@@ -12,9 +12,12 @@
 #include <vector>
 #include <future>
 #include <functional>
+#include <unistd.h>
+#include <pwd.h>
 
 #include "EasyLib.cpp"
 #include "HttpRequests.cpp"
 #include "death_ping.cpp"
+#include "LanArp.cpp"
 
 #endif //EASYDDOS_CONFIG_H

@@ -86,6 +86,15 @@ void printHelp() {
 }
 
 int main() {
+    /**
+     * 确保登录用户必须为root，否则就退出.
+     * 因为有一些功能确实用root是比较好的.
+     */
+    if (get_login_user_linux() != "root") {
+        cout << "Login user must be 'root'." << endl;
+        return 1;
+    }
+
     printLogo();
     cout << " [!] Version: " << version_name.c_str() << endl;
     cout << "Input 'help' to get help information." << endl;
