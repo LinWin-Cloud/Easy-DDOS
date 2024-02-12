@@ -28,3 +28,28 @@ string get_login_user_linux() {
         throw runtime_error("Can not get login user.");
     }
 }
+
+vector<string> split(string str , string split_charset) {
+    vector<string> split;
+    size_t pos = str.find(split_charset);
+    while (pos != std::string::npos) {
+        std::string word = str.substr(0, pos);
+        split.push_back(word);
+        // 移除已处理的子字符串
+        str = str.substr(pos + 1);
+        pos = str.find(split_charset);
+    }
+    split.push_back(str);
+    return split;
+}
+
+string replaceAll_Cpp(string str_to , char charToReplace , char newChar) {
+    // 遍历字符串，并替换所有出现的charToReplace字符
+    string str = std::move(str_to);
+    for (size_t i = 0; i < str.length(); ++i) {
+        if (str[i] == charToReplace) {
+            str[i] = newChar;
+        }
+    }
+    return str;
+}

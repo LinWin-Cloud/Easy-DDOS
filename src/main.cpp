@@ -121,6 +121,9 @@ int main() {
         else if (command == "3") {
             cout << lan_arp_linux().c_str() << endl;
         }
+        else if (command == "4") {
+            lan_ip_address();
+        }
         else if (command == "5") {
             whois();
         }

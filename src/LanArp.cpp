@@ -18,3 +18,20 @@ string lan_arp_linux() {
         return ss.str();
     }
 }
+
+vector<string> lan_ip_address() {
+    vector<string> ips;
+    string lan_arp = lan_arp_linux();
+    vector<string> line_arp = split(lan_arp , "\n");
+    for (int i = 2;i < line_arp.size() ;i++) {
+        if (i >= line_arp.size() -3) {
+            break;
+        }
+        char *const o_c = " ";
+        char *const n_c = "";
+        string ip = replaceAll_Cpp(line_arp[i] , *o_c, *n_c);
+        cout << ip.substr(0,ip.find(" ")) << endl;
+        ips.push_back(line_arp[i].substr(0, line_arp[i].find(' ')));
+    }
+    return ips;
+}
