@@ -14,6 +14,7 @@
 #include <functional>
 #include <unistd.h>
 #include <pwd.h>
+#include "sstream"
 
 #include "EasyLib.cpp"
 #include "HttpRequests.cpp"

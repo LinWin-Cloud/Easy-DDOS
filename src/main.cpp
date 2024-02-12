@@ -7,7 +7,7 @@ using namespace std;
 
 string version_name = "1.0 Public";
 
-[[noreturn]] void http_attack_one_thread(string number , string target , int j) {
+void http_attack_one_thread(string number , string target , int j) {
     auto* httpRequests = new HttpRequests(target);
     try {
         if (number == "max") {
@@ -78,8 +78,8 @@ void printHelp() {
     string help_info = R"(
  -1- HTTP攻击          按下 1                模拟若干用户不停发送HTTP请求
  -2- 死亡之ping        按下 2                模拟若干用户不停发送ping攻击
- -3- 局域网扫描         按下 3                扫描所有局域网网段，并且获取目标的基础信息
- -4- 局域网/热点破坏     按下 4                利用局域网扫描信息实施局域网/热点网络环境破坏
+ -3- 局域网扫描        按下 3                扫描所有局域网网段，并且获取目标的基础信息
+ -4- 局域网/热点破坏   按下 4                利用局域网扫描信息实施局域网/热点网络环境破坏
  -5- Whois工具         按下 5                通过 whois 工具查询网站信息
     )";
     cout << help_info.c_str() << endl;
@@ -91,7 +91,7 @@ int main() {
      * 因为有一些功能确实用root是比较好的.
      */
     if (get_login_user_linux() != "root") {
-        cout << "Login user must be 'root'." << endl;
+        cout << "Login user must be 'root'. User: " << get_login_user_linux().c_str() << endl;
         return 1;
     }
 
@@ -117,6 +117,9 @@ int main() {
         else if (command == "2") {
             auto* death_ping = new DeathOfPing();
             death_ping->Console();
+        }
+        else if (command == "3") {
+            cout << lan_arp_linux().c_str() << endl;
         }
         else if (command == "5") {
             whois();
