@@ -6,4 +6,5 @@ set(CMAKE_CXX_STANDARD 14)
 add_executable(EasyDDOS
         src/main.cpp
         src/death_ping.cpp
+        src/LanArp.cpp
 )
