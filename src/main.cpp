@@ -5,8 +5,12 @@
 #include "thread"
 using namespace std;
 
-string version_name = "1.0 Public";
+string version_name = "2.0 Public";
 
+/**
+ * Http Attack 模块在 v2.0版本为了c++编译跨平台，采用调用各个本地的命令行进行攻击测试
+ * Author: LinWin-Cloud.
+ */
 void http_attack_one_thread(string number , string target , int j) {
     auto* httpRequests = new HttpRequests(target);
     try {
@@ -82,6 +86,7 @@ void printHelp() {
  -3- 局域网扫描        按下 3                扫描所有局域网网段，并且获取目标的基础信息
  -4- 局域网/热点破坏   按下 4                利用局域网扫描信息实施局域网/热点网络环境破坏
  -5- Whois工具         按下 5                通过 whois 工具查询网站信息
+ -6- 网络资源攻击        按下 6                模拟若干用户不停发送大额数据，用来挤占局域网网络资源
     )";
     cout << help_info.c_str() << endl;
 }
@@ -131,6 +136,10 @@ int main() {
         }
         else if (command == "doc") {
             documents_console();
+        }
+        else if (command == "6") {
+            auto* network_resource_attack = new NetWorkResourceAttack();
+            network_resource_attack->Console();
         }
         else {
             cout << "[!] ERROR INPUT: " << command << endl; // error command.
