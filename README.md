@@ -14,6 +14,9 @@ EasyDDOS高性能DDOS工具-流量杀手。专门设计用于在一段时间内(
     1. QQ: 2382546858
     2. 邮箱: 2382546858@qq.com
 
+### 文档
+- https://gitee.com/LinWin-Cloud/easy-ddos/wiki/
+
 ### 攻击内容
 - 1 HTTP攻击: 模拟若干用户不停发送HTTP请求
 - 2 死亡之ping: 模拟若干用户不停发送ping攻击
@@ -34,9 +37,10 @@ EasyDDOS高性能DDOS工具-流量杀手。专门设计用于在一段时间内(
 运行EasyDDOS
 > sudo ./bin/easy_ddos  #必须以root运行，否则无法运行
 
-### 如果你想要编译这个软件，那么
+### 编译软件
 安装必要的库
 > python3 ./install_lib.py
+
 依赖的库
 ```
 libcurl4-openssl-dev
