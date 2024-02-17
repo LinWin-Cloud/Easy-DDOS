@@ -7,4 +7,5 @@ add_executable(EasyDDOS
         src/main.cpp
         src/death_ping.cpp
         src/LanArp.cpp
+        src/HttpRequests_Socket.cpp
 )
