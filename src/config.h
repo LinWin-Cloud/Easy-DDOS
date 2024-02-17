@@ -17,8 +17,8 @@
 #include "sstream"
 
 #include "network_resource_attack.cpp"
-#include "EasyLib.cpp"
-#include "HttpRequests.cpp"
+
+
 #include "death_ping.cpp"
 #include "LanArp.cpp"
 #include "lan_attack.cpp"

@@ -3,7 +3,7 @@
 //
 
 #include <curl/curl.h>
-#include "config.h"
+
 
 class HttpRequests {
 private:
