@@ -23,9 +23,9 @@ CMake Error at /home/ubuntu/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/
 
   It fails with the following output:
 
-    Change Dir: '/home/ubuntu/EasyDDOS/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-NAlmmO'
+    Change Dir: '/home/ubuntu/EasyDDOS/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-cQBb4q'
     
-    Run Build Command(s): /home/ubuntu/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -E env VERBOSE=1 g++ -f Makefile cmTC_6af31/fast
+    Run Build Command(s): /home/ubuntu/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -E env VERBOSE=1 g++ -f Makefile cmTC_97665/fast
     g++: error: unrecognized command-line option ‘-f’
     
     
